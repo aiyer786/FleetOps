@@ -8,6 +8,7 @@ import customerRoutes from "./routes/customerRoutes";
 import truckRoutes from "./routes/truckRoutes";
 import batteryRoutes from "./routes/batteryRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
+import vendorBatchRoutes from "./routes/vendorBatchRoutes";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/trucks", truckRoutes);
 app.use("/api/batteries", batteryRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/vendor/batches", vendorBatchRoutes);
 
 
 // API health check
