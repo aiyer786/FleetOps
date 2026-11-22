@@ -9,6 +9,7 @@ import truckRoutes from "./routes/truckRoutes";
 import batteryRoutes from "./routes/batteryRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import vendorBatchRoutes from "./routes/vendorBatchRoutes";
+import { startVendorReconciliationWorker } from "./workers/vendorReconciliationWorker";
 
 const app = express();
 
@@ -33,4 +34,5 @@ const PORT = 5000;
 
 app.listen(PORT, () => {
   console.log(`FleetOps API running on port ${PORT}`);
+  startVendorReconciliationWorker();
 });

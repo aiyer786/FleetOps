@@ -20,7 +20,12 @@ function isValidTimestamp(value: unknown): value is string {
   // Require an explicit timezone: Z or +/-HH:MM
   if (!/(Z|[+-]\d{2}:\d{2})$/i.test(value)) return false;
 
-  return !Number.isNaN(Date.parse(value));
+  const timestamp = Date.parse(value);
+
+  if (Number.isNaN(timestamp)) return false;
+
+  // Reject timestamps more than 5 minutes into the future.
+  return timestamp <= Date.now() + 5 * 60 * 1000;
 }
 
 export function validateVendorBatch(

@@ -1,6 +1,7 @@
 
 import { Request, Response } from "express";
 import { ingestVendorBatch } from "../services/vendorBatchService";
+import { getVendorFeedHealth } from "../services/vendorFeedHealthService";
 
 export async function receiveVendorBatch(
   req: Request,
@@ -41,6 +42,27 @@ export async function receiveVendorBatch(
     res.status(500).json({
       success: false,
       error: "VENDOR_BATCH_INGESTION_FAILED",
+    });
+  }
+}
+
+export async function getVendorFeedHealthStatus(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const health = await getVendorFeedHealth();
+
+    res.status(200).json({
+      success: true,
+      vendors: health,
+    });
+  } catch (error) {
+    console.error("Vendor feed health check failed:", error);
+
+    res.status(500).json({
+      success: false,
+      error: "VENDOR_FEED_HEALTH_CHECK_FAILED",
     });
   }
 }

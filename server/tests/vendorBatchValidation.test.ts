@@ -66,4 +66,14 @@ describe("validateVendorBatch", () => {
       { message: "INVALID_SOURCE_TIMESTAMP" }
     );
   });
+  it("rejects future timestamps", () => {
+  assert.throws(
+    () =>
+      validateVendorBatch({
+        ...validBatch,
+        sourceTimestamp: "2099-11-22T08:00:00Z",
+      }),
+    { message: "INVALID_SOURCE_TIMESTAMP" }
+  );
+  });
 });
